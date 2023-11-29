@@ -1,0 +1,38 @@
+{
+  "platform": "QTB2B",
+  "email": "dev@flyfar.tech",
+  "phone": "1234567890",
+  "name": "JohnDoe",
+  "tripType": 1,
+  "passengerData": {
+    "adult": [
+      {
+        "firstName": "karilmtest",
+        "lastName": "krtest",
+        "gender": "Male",
+        "dob": "1997-11-01",
+        "passNation": "BD",
+        "passNo": "413449965",
+        "passEx": "2026-11-20",
+        "type": "ADT",
+        "prefix": "MR"
+      }
+    ],
+    "child": [],
+    "infant": []
+  },
+  "system": "system001",
+  "segments": [
+    {
+      "marketingCareer": "BS",
+      "marketingFlight": "142",
+      "operatingCareer": "BS",
+      "operatingFlight": "142",
+      "departure": "CXB",
+      "departureDateTime": "2023-12-25T09:20:00",
+      "arrival": "DAC",
+      "arrivalDateTime": "2023-12-25T10:20:00",
+      "bookingCode": "I"
+    }
+  ]
+}

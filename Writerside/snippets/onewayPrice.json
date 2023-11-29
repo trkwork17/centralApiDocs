@@ -1,0 +1,21 @@
+{
+  "adultCount": 1,
+  "childCount": 0,
+  "infantCount": 0,
+  "system": "system001",
+  "segment": 1,
+  "tripType": "1",
+  "segments": [
+    {
+      "marketingCareer": "BS",
+      "marketingFlight": "342",
+      "operatingCareer": "BS",
+      "operatingFlight": "342",
+      "departure": "DXB",
+      "departureDateTime": "2023-12-20T21:45:00",
+      "arrival": "DAC",
+      "arrivalDateTime": "2023-12-20T04:20:00",
+      "bookingCode": "S"
+    }
+  ]
+}

@@ -3,8 +3,8 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="adoc"
-                 name="API Docs"
-                 start-page="api-docs.md">
+                  name="API Docs"
+                  start-page="api-docs.md">
 
     <toc-element topic="api-docs.md"/>
     <toc-element topic="API-quickstart.md"/>
@@ -25,6 +25,15 @@
             <toc-element topic="Get-user-by-user-name.md"/>
             <toc-element topic="Update-user.md"/>
             <toc-element topic="Delete-user.md"/>
+        </toc-element>
+        <toc-element toc-title="Agent Booking">
+            <toc-element topic="Agent-booking-oneWay.md"/>
+            <toc-element topic="Agent-Booking-RoundWay.md"/>
+            <toc-element topic="agent-booking-air-retrieve.md"/>
+            <toc-element topic="agent-one-way-price.md"/>
+            <toc-element topic="agent-round-way-price.md"/>
+            <toc-element topic="agent-booking-cancle.md"/>
+
         </toc-element>
     </toc-element>
     <toc-element topic="Changes.md"/>

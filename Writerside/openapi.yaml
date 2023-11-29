@@ -186,7 +186,7 @@ paths:
         '404':
           description: Pet not found
       security:
-        - api_key: []
+        - api_key: [ ]
         - petstore_auth:
             - 'write:pets'
             - 'read:pets'
@@ -305,7 +305,7 @@ paths:
                   type: integer
                   format: int32
       security:
-        - api_key: []
+        - api_key: [ ]
   /store/order/v1:
     post:
       tags:
@@ -423,6 +423,311 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
+  /agent/booking/booking:
+    post:
+      tags:
+        - Agent one Way Booking Route
+      summary: Create Account
+      description: This is a private Route.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/oneWayBookingRequest'
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bookingSuccess'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /agent/booking/roundbooking:
+    post:
+      tags:
+        - Agent one Way Booking Route
+      summary: Create Account
+      description: This is a private Route.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/roundWayBookingRequest'
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bookingSuccess'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agent/booking/retrieve_booking{id}:
+    post:
+      tags:
+        - Agent Booking Retrieval Route
+      summary: Retrieve Booking
+      description: This is a private route for retrieving a booking. This is use for get the timeLimit and Airline Pnr
+
+      operationId: retrieveBooking
+      parameters:
+        - name: id
+          in: query
+          description: The unique identifier for the booking.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bookingSuccessSingle'
+
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agent/booking/cancel{id}:
+    delete:
+      tags:
+        - Agent Booking Retrieval Route
+      summary: Retrieve Booking
+      description: This is a private route for retrieving a booking. This is use for get the timeLimit and Airline Pnr
+
+      operationId: retrieveBooking
+      parameters:
+        - name: id
+          in: query
+          description: The unique identifier for the booking.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bookingSuccessSingle'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agent/booking/air-price-oneWay:
+    post:
+      tags:
+        - Agent Booking Retrieval Route
+      summary: Price list of Booking
+      description: This is a private route for air price a booking.
+
+      operationId: retrieveBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/oneWayPriceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/priceOneWayResponse'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /agent/booking/air-price-roundWay:
+    post:
+      tags:
+        - Agent Booking Retrieval Route
+      summary: Price list of Booking
+      description: This is a private route for air price a booking.
+
+      operationId: retrieveBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/roundWayPriceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/priceOneWayResponse'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
   /user/createWithList:
     post:
@@ -502,7 +807,7 @@ paths:
       summary: Log current user out
       description: ''
       operationId: logoutUser
-      parameters: []
+      parameters: [ ]
       responses:
         default:
           description: successful operation
@@ -807,6 +1112,846 @@ components:
       xml:
         name: '##default'
       type: object
+
+    roundWayBookingRequest:
+      allOf:
+        - $ref: '#/components/schemas/RequestBase'
+        - type: object
+          properties:
+            segments:
+              type: object
+              properties:
+                go:
+                  type: array
+                  description: Must contain one object
+                  items:
+                    $ref: '#/components/schemas/Segment'
+                back:
+                  type: array
+                  description: Must contain one object
+                  items:
+                    $ref: '#/components/schemas/Segment'
+              required:
+                - go
+                - back
+    oneWayPriceRequest:
+      allOf:
+        - $ref: '#/components/schemas/priceRequestBase'
+        - type: object
+          properties:
+            segments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Segment'
+      required:
+        - segments
+    roundWayPriceRequest:
+      allOf:
+        - $ref: '#/components/schemas/priceRequestBase'
+        - type: object
+          properties:
+            segments:
+              type: object
+              properties:
+                go:
+                  type: array
+                  description: Must contain one object
+                  items:
+                    $ref: '#/components/schemas/Segment'
+                back:
+                  type: array
+                  description: Must contain one object
+                  items:
+                    $ref: '#/components/schemas/Segment'
+              required:
+                - go
+                - back
+      required:
+        - segments
+
+    priceRequestBase:
+      type: object
+      properties:
+
+         adultCount:
+            type: number
+            format: integer
+            description: must be required minimum 1 as number of adult
+         childCount:
+            type: number
+            format: integer
+            description: optional, number of adult
+         infantCount:
+            type: number
+            format: integer
+            description: optional, number of infant
+         tripType:
+            type: number
+            format: integer
+            description: must be 0 for one way 1 for round way and multiCity no idea
+         systems:
+            type: string
+            format: string
+            description: system must be system001 ar something for system name
+      required:
+        - tripType
+        - adultCount
+        - childCount
+        - infantCount
+
+
+    oneWayBookingRequest:
+      allOf:
+        - $ref: '#/components/schemas/RequestBase'
+        - type: object
+          properties:
+            segments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Segment'
+          required:
+            - segments
+
+
+    RequestBase:
+      type: object
+      properties:
+        platform:
+          type: string
+          description: Platform information although when UI is on live then it may handle in server.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Phone number.
+        name:
+          type: string
+          description: Name.
+        passengerData:
+          $ref: '#/components/schemas/PassengerInformation'
+        system:
+          type: string
+          description: System information i.e system001 for sabre.
+      required:
+        - system
+        - segments
+        - passengerData
+        - platform
+
+
+
+
+
+
+    bookingSuccess:
+      type: array
+      properties:
+        booking:
+          $ref: '#/components/schemas/bookingSuccessSingle'
+        Passengers:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the passenger.
+            uid:
+              type: integer
+              description: Unique user identifier for the passenger.
+            paxId:
+              type: string
+              description: Unique identifier for the passenger.
+            agentId:
+              type: string
+              description: Unique identifier for the agent associated with the passenger.
+            subagentId:
+              type: string
+              description: Unique identifier for the sub agent if he make the booking associated with the passenger.
+            staffId:
+              type: string
+              description: Placeholder for staff identifier.
+            bookingId:
+              type: string
+              description: Unique identifier for the associated booking.
+            userId:
+              type: string
+              description: Unique identifier for the user associated with the passenger.
+            prefix:
+              type: string
+              description: Placeholder for prefix information.
+            firstName:
+              type: string
+              description: First name of the passenger.
+            lastName:
+              type: string
+              description: Last name of the passenger.
+            dob:
+              type: string
+              format: date
+              description: Date of birth of the passenger.
+            Type:
+              type: string
+              description: Type information, if applicable.
+            passNation:
+              type: string
+              description: Passport nation code (e.g., BD).
+            passNo:
+              type: string
+              description: Passport number of the passenger.
+            passEx:
+              type: string
+              format: date-time
+              description: Passport expiration date and time.
+            phone:
+              type: string
+              description: Phone number of the passenger.
+            email:
+              type: string
+              description: Email address of the passenger.
+            address:
+              type: string
+              description: Address information, if applicable.
+            gender:
+              type: string
+              description: Gender of the passenger (e.g., Male).
+            passportCopy:
+              type: string
+              description: URL or reference to the passport copy, if applicable.
+            visaCopy:
+              type: string
+              description: URL or reference to the visa copy, if applicable.
+            createdAt:
+              type: string
+              format: date-time
+              description: Date and time when the passenger record was created.
+            updatedAt:
+              type: string
+              format: date-time
+              description: Date and time when the passenger record was last updated.
+            adminId:
+              type: string
+              description: Placeholder for admin identifier.
+
+    bookingSuccessSingle:
+      type: array
+      properties:
+        booking:
+          type: object
+          properties:
+            id:
+              type: string
+              format: 16 bit hex string
+              description: Unique identifier for the booking and non trackable identifier
+            uid:
+              type: integer
+              format: int16
+              description: primary key track the number of successful insert into db
+            userId:
+              type: string
+              format: 16 bit hex string
+              description: Unique identifier for the user if he make the booking
+            vendor:
+              type: string
+            invoice:
+              type: number
+              format: float
+            ticketId:
+              type: string
+              format: 16 bit binary HexDecimal string
+              description: initially empty string when Booking is Issued then generate
+                an 16 bit hex string as unique id for farther tracking
+            agentId:
+              type: string
+              format: 16 bit binary HexDecimal string
+              description: if booking made by any agent so the id of the the agent will appear otherwise null for farther tracking
+            subagentId:
+              type: string
+              format: 16 binary HexDecimal bit string
+              description: if booking made by any  sub agent so the id of the the agent will appear otherwise null for farther tracking
+            staffId:
+              type: string
+              format: 16 binary HexDecimal bit string
+              description: if booking made by any staff so the id of the the agent will appear otherwise null for farther tracking
+            email:
+              type: string
+              format: email
+              description: email of the booking Holder
+            phone:
+              type: string
+              format: phone
+              description: phone number of the booking Holder
+            name:
+              type: string
+              format: string
+              description: name of the booking Holder
+            refundable:
+              type: boolean
+              format: 1 or 0 due to boolean nit direct not support in my sql
+              description: 1 for refundable 0 for non refundable
+            upPnr:
+              type: string
+              format: string
+              description: less idea about this may related with galileo
+            airlinesPNR:
+              type: string
+              format: 6 digits string
+              description: related with airline number
+            tripType:
+              type: string
+              format: string
+              description: description of the flight is one way or round way or multiCity
+            journeyType:
+              type: string
+              format: string
+              description: if the journey is domestic in BD then it Inbound otherwise outBound
+            pax:
+              type: integer
+              format: number
+              description: determine total passenger number
+            adultBag:
+              type: string
+              format: string
+              description: describe the adult bag information either in kg or piece
+            childBag:
+              type: string
+              format: string
+              description: describe the child bag information either in kg or piece
+            infantBag:
+              type: string
+              format: string
+              description: describe the infant bag information either in kg or piece
+            adultCount:
+              type: number
+              format: integer
+              description: number of adults
+            childCount:
+              type: number
+              format: integer
+              description: number of child
+            infantCount:
+              type: number
+              format: integer
+              description: number of infant
+            currency:
+              type: string
+              format: string
+              description: currency of booking price
+            buyPrice:
+              type: number
+              format: integer
+            sellPrice:
+              type: number
+              format: integer
+            clientCom:
+              type: number
+              format: integer
+            paidAmount:
+              type: number
+              format: integer
+            dueAmount:
+              type: number
+              format: integer
+            wlagentCost:
+              type: number
+              format: integer
+            subagentCost:
+              type: number
+              format: integer
+            adultCostBase:
+              type: number
+              format: integer
+              description: base cost of adult
+            childCostBas:
+              type: number
+              format: integer
+              description: base cost of child
+            infantCostBase:
+              type: number
+              format: integer
+              description: base cost of infant
+            adultCostTax:
+              type: number
+              format: integer
+              description: tax of adult
+            childCostTax:
+              type: number
+              format: integer
+              description: tax of child
+            infantCostTax:
+              type: number
+              format: integer
+              description: tax of infant
+            grossCost:
+              type: number
+              format: double
+              description: The total cost including base fare, taxes, and additional charges.
+            baseFare:
+              type: number
+              format: double
+              description: The base fare of the booking.
+            tax:
+              type: number
+              format: double
+              description: The total tax amount for the booking.
+            netCost:
+              type: number
+              format: double
+              description: The net cost after considering all costs and deductions.
+            ait:
+              type: integer
+              description: AIT (Advance Income Tax) associated with the booking.
+            coupon:
+              type: string
+              description: Coupon information, if applicable.
+            bonus:
+              type: string
+              description: Bonus information, if applicable.
+            additionalMarkupWL:
+              type: number
+              format: double
+              description: Additional markup for the WL (Waitlist) scenario.
+            additionalMarkupB2B:
+              type: number
+              format: double
+              description: Additional markup for B2B transactions.
+            deptFrom:
+              type: string
+              description: The departure airport code.
+            airlines:
+              type: string
+              description: The name of the airline.
+            airlinesComRef:
+              type: string
+              description: Airline commission reference.
+            airlinesCode:
+              type: string
+              description: Airline code.
+            commissionType:
+              type: string
+              description: The type of commission (e.g., sabresotto).
+            commissionValue:
+              type: number
+              format: integer
+              description: The commission value.
+            arriveTo:
+              type: string
+              description: The arrival airport code.
+            flightNo:
+              type: string
+              description: The flight number.
+            bookingClass:
+              type: string
+              description: The booking class.
+            status:
+              type: string
+              description: The status of the booking (e.g., Hold).
+            isPartial:
+              type: string
+              description: Flag indicating if the booking is partial.
+            PPStatus:
+              type: string
+              description: PP (Purchase Protection) status.
+            travelDate:
+              type: string
+              format: date-time
+              description: The date and time of travel.
+            timeLimit:
+              type: string
+              format: date-time
+              description: The time limit for the booking.
+            searchId:
+              type: string
+              description: Search identifier.
+            resultId:
+              type: string
+              description: Result identifier.
+            bookedBy:
+              type: string
+              description: The person or entity who booked the flight.
+            maker:
+              type: string
+              description: Maker information.
+            platform:
+              type: string
+              description: The platform through which the booking was made.
+            gdsSegment:
+              type: string
+              description: GDS  segment.
+            ticketCoupon:
+              type: string
+              description: Ticket coupon information.
+            lossAmount:
+              type: number
+              format: double
+              description: Loss amount associated with the booking.
+            itaNumber:
+              type: string
+              description: ITA (International Ticketing Association) number.
+            pccNumber:
+              type: string
+              description: PCC (Primary Control Centre) number.
+            remarks:
+              type: string
+              description: Additional remarks or comments.
+            lossReason:
+              type: string
+              description: The reason for any losses.
+            lossProfitCom:
+              type: number
+              format: double
+              description: Loss or profit from commissions.
+            assign:
+              type: null
+              description: Placeholder for assignment information.
+            assignBy:
+              type: string
+              description: The person or entity who made the assignment.
+            assignTime:
+              type: string
+              format: date-time
+              description: The time when the assignment was made.
+            paidDate:
+              type: string
+              format: date-time
+              description: The date and time when the booking was paid.
+            dueDate:
+              type: string
+              format: date-time
+              description: The due date for the payment.
+            bookedAt:
+              type: string
+              format: date-time
+              description: The date and time when the booking was made.
+            timeUpdateBy:
+              type: string
+              description: The person or entity who updated the booking.
+            lastUpdated:
+              type: string
+              format: date-time
+              description: The date and time when the booking was last updated.
+            adminId:
+              type: string
+              description: Placeholder for admin identifier.
+
+    airPriceResponse:
+      type: object
+      properties:
+        segmentType:
+          type: string
+          description: Type of travel segment (e.g., "oneWay").
+        tripType:
+          type: string
+          description: Type of trip (e.g., "oneWay").
+        journeyType:
+          type: string
+          description: Type of journey (e.g., "Outbound").
+        isRefundable:
+          type: boolean
+          description: Indicates whether the booking is refundable or not.
+        commissionType:
+          type: string
+          description: Type of commission (e.g., "sabresotti").
+        lastTicketDate:
+          type: string
+          format: date
+          description: Last date for ticket issuance (e.g., "2023-11-30").
+        validatingCarrier:
+          type: string
+          description: The airline code for validating carrier (e.g., "BS").
+        basePrice:
+          type: number
+          description: Base price of the booking.
+        clientPrice:
+          type: number
+          description: Client price of the booking.
+        agentPrice:
+          type: number
+          description: Agent price of the booking.
+        currency:
+          type: string
+          description: Currency of the booking (e.g., "BDT").
+        totalTax:
+          type: number
+          description: Total tax amount for the booking.
+        ait:
+          type: number
+          description: Advance Income Tax (AIT) associated with the booking.
+        depCity:
+          type: string
+          description: Departure city code (e.g., "Dubai").
+        arrCity:
+          type: string
+          description: Arrival city code (e.g., "Dhaka").
+        commission:
+          type: number
+          description: Commission amount for the booking.
+        fares:
+          type: array
+          items:
+            type: object
+            properties:
+              paxType:
+                type: string
+                description: Passenger type (e.g., "ADT").
+              passengerCount:
+                type: integer
+                description: Number of passengers for the fare.
+              baseFare:
+                type: number
+                description: Base fare for the fare.
+              tax:
+                type: number
+                description: Tax amount for the fare.
+              totalTax:
+                type: number
+                description: Total tax amount for the fare.
+              totalBaseFareAmount:
+                type: number
+                description: Total base fare amount for the fare.
+              totalBaseFareAmountWithTax:
+                type: number
+                description: Total base fare amount with tax for the fare.
+              currency:
+                type: string
+                description: Currency of the fare (e.g., "BDT").
+              clientPrice:
+                type: number
+                description: Client price for the fare.
+              totalClientPrice:
+                type: number
+                description: Total client price for the fare.
+              serviceFee:
+                type: number
+                description: Service fee for the fare.
+              discount:
+                type: number
+                description: Discount amount for the fare.
+              bag:
+                type: string
+                description: Baggage information for the fare (e.g., "0 KG").
+        travelTime:
+          type: string
+          format: date-time
+          description: Date and time of travel (e.g., "2023-12-20T21:45:00").
+
+    priceOneWayResponse:
+      type: object
+      properties:
+        isRefundable:
+          type: boolean
+          description: Indicates whether the booking is refundable or not.
+        tripType:
+          type: string
+          format: string
+          description: type of trip  i.e oneWay.
+        journeyType:
+          type: string
+          description: Type of journey e.g. Outbound.
+        commissionType:
+          type: string
+          description: Type of commission e.g. sabresotti.
+        lastTicketDate:
+            type: string
+            format: date
+            description: Last date for ticket issuance e.g. 2023-11-30.
+        validatingCarrier:
+            type: string
+            description: The airline code for validating carrier e.g. BS.
+        basePrice:
+            type: number
+            description: Base price of the booking.
+        clientPrice:
+            type: number
+            description: Client price of the booking.
+        agentPrice:
+            type: number
+            description: Agent price of the booking.
+        currency:
+            type: string
+            description: Currency of the booking e.g. BDT.
+        totalTax:
+            type: number
+            description: Total tax amount for the booking.
+        ait:
+            type: number
+            description: Advance Income Tax AIT associated with the booking.
+        depCity:
+            type: string
+            description: Departure city code e.g. Dubai.
+        arrCity:
+            type: string
+            description: Arrival city code e.g. Dhaka.
+        commission:
+            type: number
+            description: Commission amount for the booking.
+        fares:
+            type: array
+            items:
+              type: object
+              properties:
+                paxType:
+                  type: string
+                  description: Passenger type e.g. ADT.
+                passengerCount:
+                  type: integer
+                  description: Number of passengers for the fare.
+                baseFare:
+                  type: number
+                  description: Base fare for the fare.
+                tax:
+                  type: number
+                  description: Tax amount for the fare.
+                totalTax:
+                  type: number
+                  description: Total tax amount for the fare.
+                totalBaseFareAmount:
+                  type: number
+                  description: Total base fare amount for the fare.
+                totalBaseFareAmountWithTax:
+                  type: number
+                  description: Total base fare amount with tax for the fare.
+                currency:
+                  type: string
+                  description: Currency of the fare e.g. BDT.
+                clientPrice:
+                  type: number
+                  description: Client price for the fare.
+                totalClientPrice:
+                  type: number
+                  description: Total client price for the fare.
+                serviceFee:
+                  type: number
+                  description: Service fee for the fare.
+                discount:
+                  type: number
+                  description: Discount amount for the fare.
+                bag:
+                  type: string
+                  description: Baggage information for the fare e.g. 0 KG.
+        travelTime:
+            type: string
+            format: date-time
+            description: Date and time of travel e.g. 2023-12-20T21:45:00.
+
+
+    Segment:
+      type: object
+      properties:
+        marketingCareer:
+          type: string
+          description: Marketing career code for the flight segment.
+        marketingFlight:
+          type: string
+          description: Marketing flight code for the flight segment.
+        operatingCareer:
+          type: string
+          description: Operating career code for the flight segment.
+        operatingFlight:
+          type: string
+          description: Operating flight code for the flight segment.
+        departure:
+          type: string
+          description: Departure airport code for the flight segment.
+        departureDateTime:
+          type: string
+          format: date-time
+          description: Departure date and time for the flight segment.
+        arrival:
+          type: string
+          description: Arrival airport code for the flight segment.
+        arrivalDateTime:
+          type: string
+          format: date-time
+          description: Arrival date and time for the flight segment.
+        bookingCode:
+          type: string
+          description: Booking code for the flight segment.
+      required:
+        - marketingCareer
+        - marketingFlight
+        - operatingCareer
+        - operatingFlight
+        - departure
+        - departureDateTime
+        - arrival
+        - arrivalDateTime
+        - bookingCode
+    PassengerInformation:
+      type: object
+      properties:
+        adult:
+          type: array
+          description: must be provide non empty array
+          items:
+            $ref: '#/components/schemas/Passenger'
+
+        child:
+          type: array
+          description: can be provide  empty array
+          items:
+            $ref: '#/components/schemas/Passenger'
+        infant:
+          type: array
+          description: can be provide  empty array
+          items:
+            $ref: '#/components/schemas/Passenger'
+      required:
+        - adult
+        - child
+        - infant
+    Passenger:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: First name of the passenger.
+        lastName:
+          type: string
+          description: Last name of the passenger.
+        gender:
+          type: string
+          description: Gender of the passenger.
+        dob:
+          type: string
+          format: date
+          description: Date of birth of the passenger.
+        passNation:
+          type: string
+          description: Passport nation code of the passenger.
+        passNo:
+          type: string
+          description: Passport number of the passenger.
+        passEx:
+          type: string
+          format: date
+          description: Passport expiration date of the passenger.
+        type:
+          type: string
+          description: Type of passenger (e.g., ADT).
+        prefix:
+          type: string
+          description: Prefix of the passenger (e.g., MR).
+      required:
+        - firstName
+        - lastName
+        - gender
+        - dob
+        - type
+        - passNation
+        - passEx
+        - passNo
+        - prefix
+
+    TokenNotFound:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates whether the request was successful or not and it always false here.
+        error:
+          type: string
+          description: Error message indicating the reason for the failure.
+
     ErrorResponse:
       type: object
       properties:
@@ -824,6 +1969,7 @@ components:
                 type: string
         message:
           type: string
+
   requestBodies:
     Pet:
       content:

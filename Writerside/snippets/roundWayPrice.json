@@ -1,0 +1,57 @@
+{
+  "adultCount": 1,
+  "childCount": 0,
+  "infantCount": 0,
+  "tripType": 2,
+  "system": "system001",
+  "segments": {
+    "go": [
+      {
+        "marketingCareer": "EK",
+        "marketingFlight": 587,
+        "operatingCareer": "QR",
+        "operatingFlight": 587,
+        "departure": "DAC",
+        "departureDateTime": "2024-01-04T18:40:00",
+        "arrival": "DXB",
+        "arrivalDateTime": "2024-01-04T22:10:00",
+        "bookingCode": "M"
+      },
+      {
+        "marketingCareer": "EK",
+        "marketingFlight": 203,
+        "operatingCareer": "EK",
+        "operatingFlight": 203,
+        "departure": "DXB",
+        "departureDateTime": "2024-01-05T02:35:00",
+        "arrival": "JFK",
+        "arrivalDateTime": "2024-01-05T08:15:00",
+        "bookingCode": "M"
+      }
+    ],
+    "back": [
+      {
+        "marketingCareer": "EK",
+        "marketingFlight": 204,
+        "operatingCareer": "EK",
+        "operatingFlight": 204,
+        "departure": "JFK",
+        "departureDateTime": "2024-01-10T10:40:00",
+        "arrival": "DXB",
+        "arrivalDateTime": "2024-01-11T08:10:00",
+        "bookingCode": "L"
+      },
+      {
+        "marketingCareer": "EK",
+        "marketingFlight": 584,
+        "operatingCareer": "EK",
+        "operatingFlight": 584,
+        "departure": "DXB",
+        "departureDateTime": "2024-01-11T16:45:00",
+        "arrival": "DAC",
+        "arrivalDateTime": "2024-01-11T23:00:00",
+        "bookingCode": "L"
+      }
+    ]
+  }
+}

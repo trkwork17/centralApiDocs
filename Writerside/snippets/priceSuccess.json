@@ -1,0 +1,38 @@
+[
+  {
+    "segmentType": "oneWay",
+    "tripType": "oneWay",
+    "journeyType": "Outbound",
+    "isRefundable": true,
+    "commissionType": "sabresotti",
+    "lastTicketDate": "2023-11-30",
+    "validatingCarrier": "BS",
+    "basePrice": 18958,
+    "clientPrice": 22571,
+    "agentPrice": 20345,
+    "currency": "BDT",
+    "totalTax": 3613,
+    "ait": 0.003,
+    "depCity": "Dubai",
+    "arrCity": "Dhaka",
+    "commission": 12.1,
+    "fares": [
+      {
+        "paxType": "ADT",
+        "passengerCount": 1,
+        "baseFare": 18958,
+        "tax": 3613,
+        "totalTax": 3613,
+        "totalBaseFareAmount": 18958,
+        "totalBaseFareAmountWithTax": 22571,
+        "currency": "BDT",
+        "clientPrice": 22571,
+        "totalClientPrice": 22571,
+        "serviceFee": 0,
+        "discount": 0,
+        "bag": "0 KG"
+      }
+    ],
+    "travelTime": "2023-12-20T21:45:00"
+  }
+]

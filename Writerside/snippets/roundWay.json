@@ -1,0 +1,54 @@
+{
+  "platform": "QTB2B",
+  "email": "sakhawat@flyfar.tech",
+  "phone": "1234567890",
+  "name": "skr",
+  "passengerData": {
+    "adult": [
+      {
+        "firstName": "robst",
+        "lastName": "ayjdt",
+        "gender": "Male",
+        "dob": "2003-09-06",
+        "passNation": "BD",
+        "passNo": "20155512CF",
+        "passEx": "2031-10-09"
+      }
+    ],
+    "child": [
+
+    ],
+    "infant": [
+
+    ]
+  },
+  "system": "system001",
+  "segments": {
+    "go": [
+      {
+        "marketingCareer": "BS",
+        "marketingFlight": 341,
+        "operatingCareer": "BS",
+        "operatingFlight": 341,
+        "departure": "DAC",
+        "departureDateTime": "2023-12-10T17:00:00",
+        "arrival": "DXB",
+        "arrivalDateTime": "2023-12-10T20:45:00",
+        "bookingCode": "E"
+      }
+    ],
+    "back": [
+      {
+        "marketingCareer": "BS",
+        "marketingFlight": 342,
+        "operatingCareer": "BS",
+        "operatingFlight": 342,
+        "departure": "DXB",
+        "departureDateTime": "2023-12-10T21:45:00",
+        "arrival": "DAC",
+        "arrivalDateTime": "2023-12-20T04:20:00",
+        "bookingCode": "E"
+      }
+    ]
+  }
+}
