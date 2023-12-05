@@ -9,66 +9,59 @@ provides optimal routes.
 
 ## What you can do using <API name>
 
-In the API, there are very few routes that are free like login forgot, reset password, all other  
-routes to access them you should be an authorized user.There are two parts of the API one is Admin, although
-you are not able to access it until you are an admin or the super admin creates your profile, so you can create
-an account as agent then one of us admin approve your account then you can play your own games like create own staff
-sub-agent approve them
+1. **Create Air Search Request:**
+ - Perform air search requests for one-way, round-way, and multi-city flights.
+
+2. **Air Price Retrieve:**
+ - Before booking, retrieve the latest price information for specific flight services.
+
+3. **Book a Flight:**
+ - Book any flight according to your travel needs.
+
+4. **Air Retrieve:**
+ - After booking, retrieve information such as cancel time limit and other travel-related details.
+
+5. **Provide Passenger Information:**
+ - To confirm the booking request, provide all necessary parameters for your passengers.
+
+6. **Cancel, Reissue, Refund, and Void Requests:**
+ - During the time limit period, perform operations like cancel, reissue, refund, and void 
+>(**terms and conditions apply**)
+> 
+   {style="note"}
+
+7. **Wallet Deposit:**
+ - Deposit any amount of money into your wallet for future purchases.
+
+8. **Wallet Withdrawal:**
+ - Withdraw any amount of money from your wallet if needed.
 
 ## Authentication
+To perform any task on the secure route, you must provide your credentials to the application.
+To do this, you need to provide a Bearer token.
 
-The authentication methods based on express-JWT approach which blocks unauthorized access to user in route level
-for free routes will not be required validation for private routes must pass the validation protocols even the 
-super admin can't use agent or admin route to perform those operation super admin must perform through own route
-and for password store use of argon2 because others like bcryptJs can only hash less than 70 worlds and argon2 not.
-and requirements the API.
+1. **Provide Credentials:**
+ - Ensure you have valid credentials for authentication.
+
+2. **Include Bearer Token:**
+ - To perform any task, include a Bearer token in your requests.
+
+
+
 
 ## Base URL
 
 **Live URL** = [**https://quickticketsb2b-nodejs.de.r.appspot.com/**](https://quickticketsb2b-nodejs.de.r.appspot.com/)
 
-Test URL = [**http://localhost:5000/**](http://localhost:5000/)
 
-### Environment variables to run the Project
 
-| Name                    | Type    |
-|-------------------------|---------|
-| MY_VAR                  | string  |
-| HOST                    | string  |
-| USER                    | string  |
-| DATABASE                | string  |
-| PASSWORD                | string  |
-| TOKEN_EXPIRES_IN         | string  |
-| JWT_SECRET              | string  |
-| ACTIVATION_SECRET       | string  |
-| JWT_EXPIRES_IN          | string  |
-| SMPT_SERVICE            | string  |
-| SMPT_HOST               | string  |
-| SMPT_PORT               | string  |
-| SMPT_PASSWORD           | string  |
-| SMPT_MAIL               | string  |
-| NODE_DOCKER_PORT        | string  |
-| FRONTEND                | string  |
-| BUCKET                  | string  |
-| PROJECTID               | string  |
-| SABRE_USER              | string  |
-| SABRE_PASSWORD          | string  |
-| SABRE_PCC               | string  |
-| SABRE_BASE_CERT_URL     | string  |
-| SABRE_BASE_PROD_URL     | string  |
-| ADDRESS_LINE            | string  |
-| CITY_NAME               | string  |
-| COUNTRY_CODE            | string  |
-| POSTAL_CODE             | string  |
-| STATE_CODE              | string  |
-| STREET_NUMBER           | string  |
 
 
 
 
 ## Error Handling
 
-Describe the API's error response format and provide common error codes and their meanings.
+Describe the APIs error response format and provide common error codes and their meanings.
 
 ```javascript
 res.status(error.statusCode || 500)

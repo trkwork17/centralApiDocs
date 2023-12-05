@@ -1,34 +1,23 @@
-# Create list of users with given input array
+# Generate access token for perform operations
 
 <!--If an operation has several responses, you can add samples for each of them separately.-->
 
 <api-endpoint openapi-path="./../openapi.yaml" endpoint="/user/createWithList" method="post">
     <response type="200">
-        <sample>
+        <sample lang="JSON">
         {
-          "id": 10,
-          "username": "theUser",
-          "firstName": "John",
-          "lastName": "James",
-          "email": "john@email.com",
-          "password": "12345",
-          "phone": "12345",
-          "userStatus": 1
-        }
+    "Success": true,
+    "message": "Successfully get access token of agent",
+    "data": Your access token
+}
         </sample>
     </response>
 <response type="400">
-    <sample>
+    <sample lang="JSON">
         {
-          "code": 0,
-          "details": [
-            {
-              "typeUrl": "string",
-              "value": "string"
-            }
-          ],
-          "message": "string"
-        }
+    "success": false,
+    "error": "Json Web Token is invalid, Try again"
+}
     </sample>
 </response>
 </api-endpoint>

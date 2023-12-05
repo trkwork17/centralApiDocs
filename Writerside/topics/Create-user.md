@@ -5,7 +5,20 @@ You can add the sample inside the <sample> element or include it from a file usi
 
 <api-endpoint openapi-path="./../openapi.yaml" endpoint="/agent/create_agent" method="post">
     <request>
-        <sample src="examples.json" include-lines="1-10"/>
+        <sample lang="JSON">
+             {
+  "firstName": "abws",
+  "email": "abc11@gmail.com",
+  "password": "12345678",
+  "phone": "+8801234567",
+  "lastName": "d21",
+  "picture": "/C:/Users/Fly Far Tech/Pictures/Screenshots/proof.png",
+  "company": "abcde",
+  "companyAdd": "bd",
+  "lastName": "Do",
+  "confirmPassword": "12345678"
+}
+        </sample>
     </request>
     <response type="default">
         <sample>

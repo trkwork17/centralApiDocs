@@ -32,6 +32,7 @@ tags:
       url: 'http://swagger.io'
   - name: user
     description: Operations about user
+
 paths:
   /pet:
     post:
@@ -423,7 +424,48 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
-  /agent/booking/booking:
+
+  /access_token:
+    get:
+      tags:
+        - get_access_token for operations
+      summary: Get Access Token
+      description: |
+        This endpoint provides an access token required for authorization. 
+        The token is valid for a limited duration.
+
+      security:
+        - BearerAuth: [ ]
+
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: The access token for authorization.
+        '400':
+          description: false token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '404':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeaderMiss'
+
+
+
+
+  /api_agent/booking/booking:
     post:
       tags:
         - Agent one Way Booking Route
@@ -434,7 +476,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/oneWayBookingRequest'
+              $ref: '#/components/schemas/BookingRequest'
 
       responses:
         '200':
@@ -442,6 +484,7 @@ paths:
           content:
             application/json:
               schema:
+
                 $ref: '#/components/schemas/bookingSuccess'
         '401':
           description: Unauthorized
@@ -470,7 +513,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /agent/booking/roundbooking:
+  /api_agent/booking/roundbooking:
     post:
       tags:
         - Agent one Way Booking Route
@@ -496,6 +539,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenNotFound'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api_agent/booking/multicitybooking:
+    post:
+      tags:
+        - Agent multiCity Booking Route
+      summary: Create Account
+      description: This is a private Route.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/multiCityBookingRequest'
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bookingSuccess'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
 
 
         '403':
@@ -516,7 +603,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /agent/booking/retrieve_booking{id}:
+  /api_agent/booking/retrieve_booking{id}:
     post:
       tags:
         - Agent Booking Retrieval Route
@@ -566,7 +653,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /agent/booking/cancel{id}:
+  /api_agent/booking/cancel{id}:
     delete:
       tags:
         - Agent Booking Retrieval Route
@@ -622,7 +709,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /agent/booking/air-price-oneWay:
+  /api_agent/booking/air-price:
     post:
       tags:
         - Agent Booking Retrieval Route
@@ -634,7 +721,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/oneWayPriceRequest'
+              $ref: '#/components/schemas/PriceRequest'
       responses:
         '200':
           description: Successful response
@@ -675,7 +762,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /agent/booking/air-price-roundWay:
+  /api_agent/booking/air-price-roundWay:
     post:
       tags:
         - Agent Booking Retrieval Route
@@ -877,10 +964,171 @@ paths:
           description: Invalid username supplied
         '404':
           description: User not found
+  /api_agent/booking/search-results:
+    get:
+      summary: Retrieve Flight Search Results
+      description: |
+        Retrieve flight search results based on specified parameters.
+      parameters:
+        - name: type
+          in: query
+          description: Type of travel (e.g., oneway, roundway, multiCity)
+          required: true
+          schema:
+            type: string
+        - name: arr
+          in: query
+          description: Arrival airport code
+          required: true
+          schema:
+            type: string
+        - name: dep
+          in: query
+          description: Departure airport code
+          required: true
+          schema:
+            type: string
+        - name: depdate
+          in: query
+          description: Departure date (YYYY-MM-DD)
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: adult
+          in: query
+          description: Number of adult passengers
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: child
+          in: query
+          description: Number of child passengers
+          required: false
+          schema:
+            type: integer
+        - name: infant
+          in: query
+          description: Number of infant passengers
+          required: false
+          schema:
+            type: integer
+
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    items:
+
+                      $ref: '#/components/schemas/AllOneWayAfterSearch'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeaderMiss'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api_agent/booking/search-resultsRound:
+    get:
+      tags:
+        - Agent Booking Route
+      summary: Search Results of RoundWay
+      description: Get search results for bookings.
+      parameters:
+        - in: query
+          name: arr
+          description: The arrival airport code.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dep
+          description: The departure airport code.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: depdate
+          description: Departure date (YYYY-MM-DD).
+          required: true
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: arrdate
+          description:  arrival date date (YYYY-MM-DD).
+
+          required: true
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: adult
+          description: The number of adult passengers.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllRoundWayAfterSearch'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeaderMiss'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
 components:
+
   schemas:
     Order:
       x-swagger-router-model: io.swagger.petstore.model.Order
@@ -1059,6 +1307,7 @@ components:
       xml:
         name: tag
       type: object
+
     Pet:
       x-swagger-router-model: io.swagger.petstore.model.Pet
       required:
@@ -1113,6 +1362,19 @@ components:
         name: '##default'
       type: object
 
+    BookingRequest:
+      allOf:
+        - $ref: '#/components/schemas/RequestBase'
+        - type: object
+          properties:
+            segments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Segment'
+          required:
+            - segments
+
+
     roundWayBookingRequest:
       allOf:
         - $ref: '#/components/schemas/RequestBase'
@@ -1134,7 +1396,18 @@ components:
               required:
                 - go
                 - back
-    oneWayPriceRequest:
+    multiCityBookingRequest:
+      allOf:
+        - $ref: '#/components/schemas/RequestBase'
+        - type: object
+          properties:
+            segments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Segment'
+          required:
+            - segments
+    PriceRequest:
       allOf:
         - $ref: '#/components/schemas/priceRequestBase'
         - type: object
@@ -1188,29 +1461,17 @@ components:
          tripType:
             type: number
             format: integer
-            description: must be 0 for one way 1 for round way and multiCity no idea
+            description: must be 1 for one way, 2 for round way and multiCity 3
          systems:
             type: string
             format: string
-            description: system must be system001 ar something for system name
+            description: system must be system001 or something for system name
       required:
         - tripType
         - adultCount
         - childCount
         - infantCount
 
-
-    oneWayBookingRequest:
-      allOf:
-        - $ref: '#/components/schemas/RequestBase'
-        - type: object
-          properties:
-            segments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Segment'
-          required:
-            - segments
 
 
     RequestBase:
@@ -1232,20 +1493,20 @@ components:
           $ref: '#/components/schemas/PassengerInformation'
         system:
           type: string
-          description: System information i.e system001 for sabre.
+          description: System information i.e system001.
+        tripType:
+          type: string
+          format: string
+          description: description of the flight is one way or round way or multiCity
       required:
         - system
         - segments
         - passengerData
         - platform
-
-
-
-
-
+        - tripType
 
     bookingSuccess:
-      type: array
+      type: object
       properties:
         booking:
           $ref: '#/components/schemas/bookingSuccessSingle'
@@ -1333,7 +1594,7 @@ components:
               description: Placeholder for admin identifier.
 
     bookingSuccessSingle:
-      type: array
+      type: object
       properties:
         booking:
           type: object
@@ -1941,16 +2202,434 @@ components:
         - passEx
         - passNo
         - prefix
+    AllOneWayAfterSearch:
+      allOf:
+        - $ref: '#/components/schemas/AfterSearchCommon'
+        - properties:
+            priceBreakdown:
+              type: array
+              items:
+                $ref: '#/components/schemas/PriceBreakdown'
+            segments:
+              type: array
+              items:
+                $ref: '#/components/schemas/AfterSearchSegment'
+    AllRoundWayAfterSearch:
+      type: object
+      properties:
+        uId:
+          type: string
+          description: Unique identifier for the segment
+        system:
+          type: string
+          description: The system through which the segment is booked
+        segment:
+          type: integer
+          description: Segment number
+        tripType:
+          type: string
+          description: Type of trip (e.g., Outbound)
+        carrier:
+          type: string
+          description: Carrier code
+        carrierName:
+          type: string
+          description: Name of the carrier
+        lastTicketedTime:
+          type: string
+          format: date-time
+          description: Time when the last ticket was issued
+        basePrice:
+          type: number
+          description: Base price of the segment
+        taxes:
+          type: number
+          description: Taxes associated with the segment
+        agentPrice:
+          type: number
+          description: Price for the agent
+        clientPrice:
+          type: number
+          description: Price for the client
+        commission:
+          type: number
+          description: Commission amount
+        commissionValue:
+          type: number
+          description: Commission value
+        commissionType:
+          type: string
+          description: Type of commission (e.g., sitti)
+        departure:
+          type: string
+          description: Departure airport code
+        departureDate:
+          type: string
+          format: date
+          description: Departure date
+        departureTime:
+          type: string
+          description: Departure time
+        arrival:
+          type: string
+          description: Arrival airport code
+        arrivalDate:
+          type: string
+          format: date
+          description: Arrival date
+        arrivalTime:
+          type: string
+          description: Arrival time
+        class:
+          type: string
+          description: Travel class (e.g., Business)
+        fareCurrency:
+          type: string
+          description: Currency of the fare (e.g., BDT)
+        totalFlightDuration:
+          type: string
+          description: Total flight duration
+        transit:
+          $ref: '#/components/schemas/transit'
+        availableSeat:
+          type: string
+          description: Number of available seats
+        baggage:
+          type: string
+          description: Baggage allowance
+        isRefundable:
+          type: string
+          description: Refundable status
+        godeparture:
+          type: string
+          description: The departure airport code for the outbound flight.
+        godepartureTime:
+          type: string
+          description: departure time for the outbound flight.
+        godepartureDate:
+          type: string
+          format: date
+          description: The departure date for the outbound flight.
+        goarrival:
+          type: string
+          description: The arrival airport code for the outbound flight.
+        goarrivalTime:
+          type: string
+          description: The arrival time for the outbound flight.
+        goarrivalDate:
+          type: string
+          format: date
+          description: The arrival date for the outbound flight.
+        backdeparture:
+          type: string
+          description: The departure airport code for the return flight.
+        backdepartureTime:
+          type: string
+          description: The departure time for the return flight.
+        backdepartureDate:
+          type: string
+          format: date
+          description: The departure date for the return flight.
+        backarrival:
+          type: string
+          description: The arrival airport code for the return flight.
+        backarrivalTime:
+          type: string
+          description: The arrival time for the return flight.
+        backarrivalDate:
+          type: string
+          format: date
+          description: The arrival date for the return flight.
+        totalGoFlightDuration:
+          type: string
+          description: The total flight duration for the outbound journey.
+        totalBackFlightDuration:
+          type: string
+          description: The total flight duration for the return journey.
+
+        priceBreakdown:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceBreakdown'
+        segments:
+          type: object
+          properties:
+            go:
+              type: array
+              description: contain information about the go segments
+              items:
+                $ref: '#/components/schemas/AfterSearchSegment'
+            back:
+              type: array
+              description: contain information about the back segments
+              items:
+                $ref: '#/components/schemas/AfterSearchSegment'
+
+
+    AfterSearchCommon:
+        type: object
+        properties:
+          uId:
+            type: string
+            description: Unique identifier for the segment
+          system:
+            type: string
+            description: The system through which the segment is booked
+          segment:
+            type: integer
+            description: Segment number
+          tripType:
+            type: string
+            description: Type of trip (e.g., Outbound)
+          carrier:
+            type: string
+            description: Carrier code
+          carrierName:
+            type: string
+            description: Name of the carrier
+          lastTicketedTime:
+            type: string
+            format: date-time
+            description: Time when the last ticket was issued
+          basePrice:
+            type: number
+            description: Base price of the segment
+          taxes:
+            type: number
+            description: Taxes associated with the segment
+          agentPrice:
+            type: number
+            description: Price for the agent
+          clientPrice:
+            type: number
+            description: Price for the client
+          commission:
+            type: number
+            description: Commission amount
+          commissionValue:
+            type: number
+            description: Commission value
+          commissionType:
+            type: string
+            description: Type of commission (e.g., sitti)
+          departure:
+            type: string
+            description: Departure airport code
+          departureDate:
+            type: string
+            format: date
+            description: Departure date
+          departureTime:
+            type: string
+            description: Departure time
+          arrival:
+            type: string
+            description: Arrival airport code
+          arrivalDate:
+            type: string
+            format: date
+            description: Arrival date
+          arrivalTime:
+            type: string
+            description: Arrival time
+          class:
+            type: string
+            description: Travel class (e.g., Business)
+          fareCurrency:
+            type: string
+            description: Currency of the fare (e.g., BDT)
+          totalFlightDuration:
+            type: string
+            description: Total flight duration
+          transit:
+            type: object
+            properties:
+              Transit:
+                type: string
+                description: Transit information
+          availableSeat:
+            type: string
+            description: Number of available seats
+          baggage:
+            type: string
+            description: Baggage allowance
+          isRefundable:
+            type: string
+            description: Refundable status
+
+
+    transit:
+      type: object
+      properties:
+        go:
+          type: object
+          description: Transit details for the outbound journey.
+          additionalProperties:
+            type: string
+            description: Transit duration for each transit point in the outbound journey.
+        back:
+          type: object
+          description: Transit details for the return journey.
+          additionalProperties:
+            type: string
+            description: Transit duration for each transit point in the return journey.
+    AfterSearchSegment:
+          type: array
+          items:
+            type: object
+            properties:
+              aircraft:
+                type: string
+                description: Aircraft type
+              marketingCarrier:
+                type: string
+                description: Marketing carrier code
+              marketingCarrierName:
+                type: string
+                description: Marketing carrier name
+              marketingFlight:
+                type: string
+                description: Marketing flight number
+              operatingCarrier:
+                type: string
+                description: Operating carrier code
+              operatingCarrierName:
+                type: string
+                description: Operating carrier name
+              operatingFlight:
+                type: string
+                description: Operating flight number
+              departure:
+                type: string
+                description: Departure airport code
+              departureAirport:
+                type: string
+                description: Departure airport name
+              departureLocation:
+                type: string
+                description: Departure location
+              departureCity:
+                type: string
+                description: Departure city
+              departureCountryCode:
+                type: string
+                description: Departure country code
+              departureCountryName:
+                type: string
+                description: Departure country name
+              departureDate:
+                type: string
+                format: date
+                description: Departure date
+              departureTime:
+                type: string
+                description: Departure time
+              departureDateTime:
+                type: string
+                format: date-time
+                description: Departure date and time
+              arrival:
+                type: string
+                description: Arrival airport code
+              arrivalAirport:
+                type: string
+                description: Arrival airport name
+              arrivalLocation:
+                type: string
+                description: Arrival location
+              arrivalCity:
+                type: string
+                description: Arrival city
+              arrivalCountryCode:
+                type: string
+                description: Arrival country code
+              arrivalCountryName:
+                type: string
+                description: Arrival country name
+              arrivalDate:
+                type: string
+                format: date
+                description: Arrival date
+              arrivalDateTime:
+                type: string
+                format: date-time
+                description: Arrival date and time
+              arrivalTime:
+                type: string
+                description: Arrival time
+              flightDuration:
+                type: string
+                description: Flight duration
+              bookingClass:
+                type: string
+                description: Booking class code
+              cabinCode:
+                type: string
+                description: Cabin code
+              mealCode:
+                type: string
+                description: Meal code
+              seatAvailable:
+                type: string
+                description: Number of available seats
+              baggage:
+                type: string
+                description: Allowed baggage limit
+    PriceBreakdown:
+      type: array
+      items:
+        type: object
+        properties:
+          paxType:
+            type: string
+            description: Passenger type code
+          paxCount:
+            type: integer
+            description: Number of passengers
+          baseFare:
+            type: number
+            description: Base fare amount
+          totalBaseFare:
+            type: number
+            description: Total base fare amount
+          Tax:
+            type: number
+            description: Tax amount
+          totalTaxAmount:
+            type: number
+            description: Total tax amount
+          totalAmount:
+            type: number
+            description: Total amount
+          discount:
+            type: number
+            description: Discount amount
+          otherCharges:
+            type: number
+            description: Other charges amount
+          serviceFee:
+            type: number
+            description: Service fee amount
+
 
     TokenNotFound:
       type: object
       properties:
         success:
           type: boolean
-          description: Indicates whether the request was successful or not and it always false here.
+          description: Always false.
         error:
           type: string
           description: Error message indicating the reason for the failure.
+    HeaderMiss:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: always false
+              error:
+                type: string
+                description: Authorization header missing
 
     ErrorResponse:
       type: object
@@ -2000,4 +2679,8 @@ components:
     api_key:
       type: apiKey
       name: api_key
+      in: header
+    BearerAuth:
+      type: apiKey
+      name: Authorization
       in: header

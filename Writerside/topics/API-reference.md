@@ -1,9 +1,9 @@
 # API Reference
 
-This is a sample Pet Store Server based on the OpenAPI 3.0 specification.
+This is a Central API Documentation Server Developed By Fly Far Tech Team.
 
-> A very important note about this API.
-> 
+> To use the API, you must get the API key from Fly Far International as an agent and security purpose we'll track your activities.
+>
 {style="note"}
 
 <!-- Use the <api-doc> element to generate the documentation for a few specific endpoints and methods with the same tag 
