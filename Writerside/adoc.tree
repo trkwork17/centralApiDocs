@@ -34,6 +34,7 @@
         <toc-element toc-title="Agent Booking">
             <toc-element topic="agent-one-way-after-search.md"/>
             <toc-element topic="agent-round-way-after-search.md"/>
+            <toc-element topic="agent-multicity-after-search.md"/>
             <toc-element topic="agent-one-way-price.md"/>
             <toc-element topic="agent-round-way-price.md"/>
             <toc-element topic="agent-multicity-price.md"/>

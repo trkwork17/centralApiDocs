@@ -1,11 +1,26 @@
 # round Way After Search
 
 <api-endpoint openapi-path="./../openapi.yaml" endpoint="/api_agent/booking/search-resultsRound" method="get">
+ <request>
+        <sample lang="JSON">
+         {
+  "type": "roundway",
+  "departureDate": "2023-12-15",
+  "departure": "DAC",
+  "arrivalDate":"2023-12-30",
+  "arrival": "DXB",
+  "adultCount": 1,
+  "childCount": 0,
+  "infantCount": 0,
+  "cabin": "Economy"
+}
+      </sample>      
+    </request> 
   <response type="200">
          <sample lang="JSON">
          {
         "uId": "b3b332c8636e4048884c2730cd000fc8",
-        "system": "sabre",
+        "system": "system001",
         "segment": 2,
         "tripType": "OutBound",
         "carrier": "KU",

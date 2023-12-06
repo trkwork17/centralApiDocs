@@ -2,6 +2,20 @@
 
 
 <api-endpoint openapi-path="./../openapi.yaml" endpoint="/api_agent/booking/search-results" method="get">
+<request>
+        <sample lang="JSON">
+          {
+  "type": "oneway",
+  "departureDate": "2023-12-15",
+  "departure": "DAC",
+  "arrival": "DXB",
+  "adultCount": 1,
+  "childCount": 0,
+  "infantCount": 0,
+  "cabin": "Economy"
+}
+      </sample>      
+    </request> 
   <response type="200">
          <sample lang="JSON">
        {

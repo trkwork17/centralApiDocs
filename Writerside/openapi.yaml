@@ -969,51 +969,11 @@ paths:
       summary: Retrieve Flight Search Results
       description: |
         Retrieve flight search results based on specified parameters.
-      parameters:
-        - name: type
-          in: query
-          description: Type of travel (e.g., oneway, roundway, multiCity)
-          required: true
-          schema:
-            type: string
-        - name: arr
-          in: query
-          description: Arrival airport code
-          required: true
-          schema:
-            type: string
-        - name: dep
-          in: query
-          description: Departure airport code
-          required: true
-          schema:
-            type: string
-        - name: depdate
-          in: query
-          description: Departure date (YYYY-MM-DD)
-          required: true
-          schema:
-            type: string
-            format: date
-        - name: adult
-          in: query
-          description: Number of adult passengers
-          required: true
-          schema:
-            type: integer
-            minimum: 1
-        - name: child
-          in: query
-          description: Number of child passengers
-          required: false
-          schema:
-            type: integer
-        - name: infant
-          in: query
-          description: Number of infant passengers
-          required: false
-          schema:
-            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OneWaySearchBody'
 
 
       responses:
@@ -1059,40 +1019,12 @@ paths:
         - Agent Booking Route
       summary: Search Results of RoundWay
       description: Get search results for bookings.
-      parameters:
-        - in: query
-          name: arr
-          description: The arrival airport code.
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: dep
-          description: The departure airport code.
-          required: true
-          schema:
-            type: string
-        - in: query
-          name: depdate
-          description: Departure date (YYYY-MM-DD).
-          required: true
-          schema:
-            type: string
-            format: date
-        - in: query
-          name: arrdate
-          description:  arrival date date (YYYY-MM-DD).
-
-          required: true
-          schema:
-            type: string
-            format: date
-        - in: query
-          name: adult
-          description: The number of adult passengers.
-          required: true
-          schema:
-            type: integer
+      operationId: afterSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoundWaySearchBody'
       responses:
         '200':
           description: Successful response
@@ -1114,6 +1046,59 @@ paths:
                 $ref: '#/components/schemas/TokenNotFound'
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api_agent/booking/search-multiCity:
+    get:
+      tags:
+        - Agent multiCity after search result
+      summary: Information about various flight
+      description: This is a private route .
+
+      operationId: afterSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiCityAfterSearchRequestBody'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlightLeg'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenNotFound'
+
+
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -2610,6 +2595,160 @@ components:
           serviceFee:
             type: number
             description: Service fee amount
+    OneWaySearchBody:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the journey (e.g., "oneway").
+        departureDate:
+          type: string
+          format: date
+          description: Departure date.
+        departure:
+          type: string
+          description: Departure airport code.
+        arrival:
+          type: string
+          description: Arrival airport code.
+        adultCount:
+          type: integer
+          description: Number of adults.
+        childCount:
+          type: integer
+          description: Number of children.
+        infantCount:
+          type: integer
+          description: Number of infants.
+        cabin:
+          type: string
+          description: Cabin class (e.g., "Economy").
+      required:
+        - type
+        - departure
+        - departureDate
+        - arrival
+        - adultCount
+        - cabin
+    RoundWaySearchBody:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the journey (e.g., "roundway").
+        departureDate:
+          type: string
+          format: date
+          description: Departure date.
+        departure:
+          type: string
+          description: Departure airport code.
+        arrivalDate:
+          type: string
+          format: date
+          description: Return journey arrival date.
+        arrival:
+          type: string
+          description: Return journey arrival airport code.
+        adultCount:
+          type: integer
+          description: Number of adults.
+        childCount:
+          type: integer
+          description: Number of children.
+        infantCount:
+          type: integer
+          description: Number of infants.
+        cabin:
+          type: string
+          description: Cabin class (e.g., "Economy").
+      required:
+      - type
+      - departure
+      - departureDate
+      - arrival
+      - arrivalDate
+      - adultCount
+      - cabin
+    FlightLeg:
+      type: object
+      properties:
+        departureDate:
+          type: string
+          format: date
+          description: Departure date.
+        departure:
+          type: string
+          description: Departure airport code.
+        arrival:
+          type: string
+          description: Arrival airport code.
+        legIndex:
+          type: integer
+          description: Leg index.
+        flightIndex:
+          type: integer
+          description: Flight index.
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AfterSearchSegment'
+        transit:
+          type: object
+          properties:
+            Transit:
+              type: string
+              description:  Transit information
+        isRefundable:
+          type: string
+          description: about refund policy
+    MultiCityAfterSearchRequestBody:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the search (e.g., multicity).
+        adultCount:
+          type: integer
+          description: The number of adult passengers.
+          minLength: 1
+        childCount:
+          type: integer
+          description: The number of child passengers.
+        infantCount:
+          type: integer
+          description: The number of infant passengers.
+        cabin:
+          type: string
+          description: The cabin class (e.g., Business).
+        segmentsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiCitySegment'
+      required:
+        - type
+        - description
+        - adultCount
+        - cabin
+        - segmentsList
+
+    MultiCitySegment:
+      type: object
+      properties:
+        departure:
+          type: string
+          description: The departure airport code.
+        arrival:
+          type: string
+          description: The arrival airport code.
+        departureDate:
+          type: string
+          format: date
+          description: The departure date.
+      required:
+        - departure
+        - departureDate
+        - arrival
 
 
     TokenNotFound:
