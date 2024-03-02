@@ -5,34 +5,32 @@
         <sample lang="JSON">
            {
     "adultCount": 1,
-    "childCount": 0,
-    "infantCount": 0,
+    "childCount": 1,
+    "infantCount": 1,
     "system": "system001",
-    "segment": 1,
     "tripType": "3",
     "segments": [
         {
-            "marketingCarrier": "SV",
-            "marketingFlightNumber": 803,
-            "operatingCarrier": "SV",
-            "operatingFlightNumber": 803,
-            "departure": "DAC",
-            "departureDateTime": "2023-12-01T01:50:00",
-            "arrival": "JED",
-            "arrivalAirPort": "Dubai Intl Airport",
-            "arrivalDateTime": "2023-12-01T06:30:00",
-            "bookingClass": "T"
+            "marketingCarrier": "BS",
+            "marketingFlightNumber": 308,
+            "operatingCarrier": "BS",
+            "operatingFlightNumber": 308,
+            "departure": "SIN",
+            "departureDateTime": "2024-04-25T05:40:00",
+            "arrival": "DAC",
+            "arrivalDateTime": "2024-04-25T07:50:00",
+            "bookingClass": "S"
         },
         {
-            "marketingCarrier": "SV",
-            "marketingFlightNumber": 1420,
-            "operatingCarrier": "UA",
-            "operatingFlightNumber": 1420,
-            "departure": "JED",
-            "departureDateTime": "2023-12-03T02:10:00",
-            "arrival": "MED",
-            "arrivalDateTime": "2023-12-03T03:20:00",
-            "bookingClass": "T"
+            "marketingCarrier": "BS",
+            "marketingFlightNumber": 217,
+            "operatingCarrier": "BS",
+            "operatingFlightNumber": 217,
+            "departure": "DAC",
+            "departureDateTime": "2024-04-25T10:10:00",
+            "arrival": "BKK",
+            "arrivalDateTime": "2024-04-25T13:40:00",
+            "bookingClass": "S"
         }
     ]
 }
@@ -41,41 +39,78 @@
     <response type="200">
          <sample lang="JSON">
           [
-    {
-        "segmentType": "oneWay",
-        "tripType": "oneWay",
-        "journeyType": "Outbound",
-        "isRefundable": true,
-        "commissionType": "sabresitti",
-        "validatingCarrier": "SV",
-        "basePrice": 179121,
-        "clientPrice": 189673,
-        "agentPrice": 176271,
-        "currency": "BDT",
-        "totalTax": 10552,
-        "ait": 0.003,
-        "depCity": "Dhaka",
-        "arrCity": "Madinah",
-        "commission": 7.8,
-        "fares": [
-            {
-                "paxType": "ADT",
-                "passengerCount": 1,
-                "baseFare": 179121,
-                "tax": 10552,
-                "totalTax": 10552,
-                "totalBaseFareAmount": 179121,
-                "totalBaseFareAmountWithTax": 189673,
-                "currency": "BDT",
-                "clientPrice": 189673,
-                "totalClientPrice": 189673,
-                "serviceFee": 0,
-                "discount": 0,
-                "bag": "1 Piece"
-            }
-        ],
-        "travelTime": "2023-12-01T01:50:00"
-    }
+   {
+            "segmentType": "multiCity",
+            "tripType": "multiCity",
+            "journeyType": "Outbound",
+            "isRefundable": true,
+            "immediateIssues": 0,
+            "commissionType": "sotto",
+            "lastTicketDate": "2024-03-04",
+            "validatingCarrier": "BS",
+            "basePrice": 61340,
+            "clientPrice": 72470,
+            "agentPrice": 68394,
+            "currency": "BDT",
+            "totalTax": 11130,
+            "depCity": "Singapore",
+            "arrCity": "Bangkok",
+            "commission": 7,
+            "fares": [
+                {
+                    "paxType": "ADT",
+                    "passengerCount": 1,
+                    "isRefundable": true,
+                    "baseFare": 33123,
+                    "tax": 5488,
+                    "totalTax": 5488,
+                    "totalBaseFareAmount": 33123,
+                    "totalBaseFareAmountWithTax": 38611,
+                    "currency": "BDT",
+                    "clientPrice": 38611,
+                    "totalClientPrice": 38611,
+                    "serviceFee": 0,
+                    "discount": 0,
+                    "agentPrice": 36408,
+                    "bag": "30 KG"
+                },
+                {
+                    "paxType": "CNN",
+                    "passengerCount": 1,
+                    "isRefundable": true,
+                    "baseFare": 24863,
+                    "tax": 5488,
+                    "totalTax": 5488,
+                    "totalBaseFareAmount": 24863,
+                    "totalBaseFareAmountWithTax": 30351,
+                    "currency": "BDT",
+                    "clientPrice": 30351,
+                    "totalClientPrice": 30351,
+                    "serviceFee": 0,
+                    "discount": 0,
+                    "agentPrice": 28702,
+                    "bag": "30 KG"
+                },
+                {
+                    "paxType": "INF",
+                    "passengerCount": 1,
+                    "isRefundable": true,
+                    "baseFare": 3354,
+                    "tax": 154,
+                    "totalTax": 154,
+                    "totalBaseFareAmount": 3354,
+                    "totalBaseFareAmountWithTax": 3508,
+                    "currency": "BDT",
+                    "clientPrice": 3508,
+                    "totalClientPrice": 3508,
+                    "serviceFee": 0,
+                    "discount": 0,
+                    "agentPrice": 3284,
+                    "bag": "10 KG"
+                }
+            ],
+            "travelTime": "2024-04-25T05:40:00"
+        }
 ]
       </sample>    
     </response>
@@ -83,7 +118,7 @@
         <sample lang="JSON">
             {
   "success": false,
-  "error": "No authorization token was found"
+  "message": "No authorization token was found"
 }   
       </sample>      
     </response>
@@ -91,7 +126,7 @@
          <sample lang="JSON">
            {
   "success": false,
-  "error": "No fights found"
+  "message": "No fights found"
 }
       </sample>   
     </response>

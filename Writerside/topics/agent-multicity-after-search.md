@@ -4,30 +4,27 @@
 <api-endpoint openapi-path="./../openapi.yaml" endpoint="/api_agent/booking/search-multiCity" method="get">
 <request>
         <sample lang="JSON">
-           {
-  "type": "multicity",
-  "adultCount": 1,
-  "childCount": 0,
-  "infantCount": 0,
-   "cabin":"Business",
-  "segmentsList": [
-    {
-      "departure": "DAC",
-      "arrival": "JED",
-      "departureDate": "2024-02-03"
-    },
-    {
-      "departure": "DXB",
-      "arrival": "MED",
-      "departureDate": "2024-02-15"
-    },
-    {
-      "departure": "BKK",
-      "arrival": "SIN",
-      "departureDate": "2024-03-01"
-    }
-  ]
-}
+          {
+    "type": "multicity",
+    "adultCount": 1,
+    "childCount": 0,
+    "infantCount": 0,
+    "cabin": "Economy",
+    "vendorPref":["BS","6E"],
+   "maxStopsQuantity": 1,
+    "segmentsList": [
+        {
+            "departure": "DAC",
+            "arrival": "DXB",
+            "departureDate": "2024-03-05"
+        },
+        {
+            "departure": "SIN",
+            "arrival": "BKK",
+            "departureDate": "2024-03-25"
+        }
+    ]
+} 
       </sample>      
     </request> 
 <response type="200">
@@ -226,7 +223,8 @@
             }
         ],
         "isRefundable": "Refundable"
-    }
+    },
+ "searchId": "012504fce9e94f71b7a1ec525709070b"
       </sample>    
     </response>
  <response type="400">
@@ -234,7 +232,7 @@
            {
  {
     "success": false,
-    "error": "Json Web Token is invalid, Try again"
+    "message": "Json Web Token is invalid, Try again"
 }
       </sample>   
     </response>

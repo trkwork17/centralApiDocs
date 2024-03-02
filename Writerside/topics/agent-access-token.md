@@ -1,7 +1,7 @@
 # Access Token
 
 
-<api-endpoint openapi-path="./../openapi.yaml" endpoint="/access_token" method="get">
+<api-endpoint openapi-path="./../openapi.yaml" endpoint="/get_access_token" method="get">
   <response type="200">
          <sample lang="JSON">
         {

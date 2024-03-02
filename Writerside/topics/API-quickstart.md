@@ -5,10 +5,18 @@ In this section, you'll find a step-by-step guide to quickly start using the API
 
 ## Prerequisites
 
-
 * To use the API, you need the API KEY for generate access token if you don't have an API key, please contact us.
 * When you have an API key, you have to generate an access token for each request
 
+## Quite Note or something need here
+
+**Test URL** = [**https://quickticketsb2b-nodejs.de.r.appspot.com/api/v1/test_api_agent/**](https://quickticketsb2b-nodejs.de.r.appspot.com/)
+
+* ###### This path is designated for testing purposes. You can explore functionalities without any charges until you make the access token block.
+
+**Live URL** = [**https://quickticketsb2b-nodejs.de.r.appspot.com/api/v1/api_agent/**](https://quickticketsb2b-nodejs.de.r.appspot.com/)]
+
+* ###### This is the live endpoint where real transactions occur. Be aware that if any issues such as ADM (Agency Debit Memo) occur due to actions performed from your end, penalties may apply.
 
 ## Making Your First Request
 
@@ -19,7 +27,9 @@ POST /api/v1/api_agent/booking/booking_price HTTP/1.1
 Host: https://quickticketsb2b-nodejs.de.r.appspot.com
 Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
- * Request Body
+
+* Request Body for one-way search
+
 ```json
   {
   "adultCount": 1,
@@ -31,7 +41,6 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
   "segments": [
     {
       "marketingCarrier": "BG",
-
       "marketingFlightNumber": "434",
       "operatingCarrier": "BG",
       "operatingCareerName": "Biman Bangladesh Airlines",
@@ -48,13 +57,15 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
       "arrivalDateTime": "2023-12-25T10:45:00",
       "flightDuration": "1H 5Min",
       "bookingClass": "G"
-
     }
   ]
 }
 ```
+
 ## Response Handling
-Explain how to handle the API responses, including parsing JSON data and handling errors.
+
+* When interacting with the Central API, it's crucial to understand how to handle the responses effectively. Here's a
+  guide on handling API responses:
 
 * Response
 
@@ -102,10 +113,10 @@ Explain how to handle the API responses, including parsing JSON data and handlin
 ]
 ```
 
-
-
 ## API Usage Tips
+
 To use the APIs effectively and efficiently must require basic knowledge of using postman and REST API.
 
 ## Next Steps
+
 You can explore more endpoints or integrate the APIs in your applications.

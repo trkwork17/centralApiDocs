@@ -1,8 +1,10 @@
 # API Reference
 
-This is a Central API Documentation Server Developed By Fly Far Tech Team.
+This is a Central API Documentation Server Developed by Tarek Rahman, Junior Backend Developer at Fly Far Tech Team,
+guided by Jahidul Islam Sohan, CTO at Fly Far Tech.
 
-> To use the API, you must get the API key from Fly Far International as an agent and security purpose we'll track your activities.
+> To use the API, you must get the API key from Fly Far International as an agent and security purpose we'll track your
+> activities.
 >
 {style="note"}
 
